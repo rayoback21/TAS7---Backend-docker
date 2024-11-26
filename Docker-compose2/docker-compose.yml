@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      POSTGRES_USER: BryanB
+      POSTGRES_PASSWORD: bryanb
+      POSTGRES_DB: nombre_base_datos
+    ports:
+      - "5432:5432"
+    networks:
+      - red_contenedores
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8081:80"
+    depends_on:
+      - postgres
+    networks:
+      - red_contenedores
+
+networks:
+  red_contenedores:
